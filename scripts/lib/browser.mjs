@@ -21,8 +21,6 @@ export async function openBrowser() {
         route.fulfill({ body: await readFile(path.join(root, 'node_modules/three', rel)), contentType: 'text/javascript' });
       } catch { route.fulfill({ status: 404 }); }
     });
-    // Fonts are cosmetic; don't let a blocked network stall rendering.
-    await context.route(/fonts\.(googleapis|gstatic)\.com/, (r) => r.fulfill({ status: 200, body: '', contentType: 'text/css' }));
     const page = await context.newPage();
     page.on('pageerror', (e) => console.error('[page error]', e.message));
     return page;
