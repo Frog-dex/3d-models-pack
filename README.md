@@ -4,6 +4,8 @@
 
 Thirteen 3D models from the Spirit Strikers site and Snowberry OS: the props from the observatory study, the terminals, and the lizard. Free to use.
 
+**Browse them in 3D:** <https://frog-dex.github.io/3d-models-pack/> (the gallery, a Model Viewer for every file, and the Observatory Study scene; published by GitHub Pages, see [The gallery](#the-gallery)).
+
 ![The thirteen models](docs/models.jpg)
 
 ## The models
@@ -44,6 +46,70 @@ A tool that cannot read those extensions needs the file unpacked first, for exam
 ```bash
 git clone https://github.com/Frog-dex/3d-models-pack.git
 ```
+
+## The gallery
+
+The repo is also a small website with no build step: plain HTML, CSS and ES modules, with three.js loaded from a CDN.
+
+| Gallery | Model Viewer | Wireframe mode |
+|:--:|:--:|:--:|
+| ![Gallery](docs/screenshot-gallery.jpg) | ![Model Viewer](docs/screenshot-viewer.jpg) | ![Wireframe](docs/screenshot-wireframe.jpg) |
+
+- **Gallery** (`index.html`): every model as a card with its triangle count and size. Filter by group or search.
+- **Model Viewer**: a Snowberry OS window. Orbit, zoom, spin, wireframe and shadow toggles, previous/next with the arrow keys, full screen, *Download .glb*, *Copy loader code* and *Save snapshot*. Each model has its own link, for example `index.html#model/lizard`.
+- **The Observatory Study** (`study.html`): all thirteen models in one room under a star-chart ceiling. The desk holds the lamp, books and clock, and the lizard stands by it. Tap a prop to fly to it, and pick the dome to step outside and see the room in cutaway.
+
+![The Observatory Study](docs/study.jpg)
+
+It works on phones too:
+
+| Home | Viewer | Study |
+|:--:|:--:|:--:|
+| <img src="docs/screenshot-mobile.jpg" width="220" alt="Home page on a phone"> | <img src="docs/screenshot-mobile-viewer.jpg" width="220" alt="Model Viewer on a phone"> | <img src="docs/screenshot-mobile-study.jpg" width="220" alt="The Study on a phone"> |
+
+### Run it locally
+
+```bash
+npm install     # dev tools only; the site has no runtime dependencies
+npm start       # http://localhost:8080
+```
+
+Any static file server works too (`python3 -m http.server`). Opening `index.html` straight from disk does not, because browsers block module imports from `file://`.
+
+### Scripts
+
+| Command | What it does |
+|---|---|
+| `npm start` | Serves the site at http://localhost:8080 |
+| `npm run check` | Runs every `.glb` through the Khronos glTF validator and checks its triangle count and file size against `site/catalog.js` |
+| `npm test` | `check`, then a headless-Chromium smoke test of the gallery, the viewer and the Study |
+| `npm run thumbs` | Re-renders the card thumbnails in `docs/thumbs/` (pass ids to render only some: `npm run thumbs -- desk lamp`) |
+| `npm run screenshot` | Re-takes the README screenshots in `docs/` |
+
+The scripts that use a browser need Playwright's Chromium (`npx playwright install chromium`). They serve three.js from `node_modules`, so they also run offline.
+
+### Adding a model
+
+1. Put the compressed `.glb` in `models/`.
+2. Add an entry to `MODELS` in `site/catalog.js`. Run `npm run check` and it tells you the exact triangle count and byte size to fill in.
+3. Run `npm run thumbs -- <id>` and, if the model belongs in the room, give it a spot in `LAYOUT` in `site/study.js`.
+4. Add a row to the table at the top of this README.
+
+### Layout
+
+```
+models/            the thirteen .glb files
+docs/              box art, the README images and thumbs/ for the gallery cards
+index.html         gallery + Model Viewer
+study.html         the Observatory Study scene
+site/catalog.js    names, groups and stats for every model (single source of truth)
+site/stage.js      shared three.js setup: loader with meshopt, lights, shadows, camera framing
+site/app.js        gallery and viewer logic
+site/study.js      the Study scene
+scripts/           dev server, model checker, thumbnail and screenshot renderers, smoke test
+```
+
+GitHub Actions runs `npm test` on every push and pull request (`.github/workflows/ci.yml`), and publishes the site to GitHub Pages from `main` (`.github/workflows/pages.yml`).
 
 ## How they were made
 

@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>3D Models Pack</title>
+  <meta name="description" content="Thirteen free 3D models from Spirit Strikers and Snowberry OS. Browse, spin and download them in the browser. CC BY 4.0.">
+  <meta name="theme-color" content="#efe5cf">
+  <meta property="og:title" content="3D Models Pack">
+  <meta property="og:description" content="Thirteen free 3D models from Spirit Strikers and Snowberry OS, CC BY 4.0.">
+  <meta property="og:image" content="docs/models.jpg">
+  <link rel="icon" href="site/icon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site/styles.css">
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.187.0/examples/jsm/"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip" href="#gallery">Skip to the models</a>
+
+  <header class="hero">
+    <nav class="topbar">
+      <a class="brand" href="./"><img src="site/icon.svg" alt="" width="28" height="28"> 3D Models Pack</a>
+      <div class="topbar-links">
+        <a href="#gallery">Models</a>
+        <a href="study.html">The Study</a>
+        <a href="#use">Use them</a>
+        <a href="https://github.com/Frog-dex/3d-models-pack">GitHub</a>
+      </div>
+    </nav>
+
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <p class="eyebrow">Add-on pack · Spirit Strikers &amp; Snowberry OS</p>
+        <h1 class="wordmark">3D Models Pack</h1>
+        <p class="lede">Thirteen props and scenes from the observatory study, the terminals and the lizard. Spin them, wireframe them, take them home. Free under CC&nbsp;BY&nbsp;4.0.</p>
+        <ul class="facts" aria-label="Pack facts">
+          <li><strong>13</strong> models</li>
+          <li><strong>3.7&nbsp;MB</strong> total</li>
+          <li><strong>.glb</strong> textures inside</li>
+        </ul>
+        <div class="cta">
+          <a class="btn btn-gold" href="#gallery">Browse the models</a>
+          <a class="btn" href="study.html">Walk into the Study</a>
+          <a class="btn btn-ghost" href="https://github.com/Frog-dex/3d-models-pack/archive/refs/heads/main.zip">Download .zip</a>
+        </div>
+      </div>
+      <figure class="hero-box">
+        <img src="docs/box.jpg" width="671" height="900" alt="3D Models Pack box art: Props &amp; Scenes for Snowberry OS">
+      </figure>
+    </div>
+  </header>
+
+  <main>
+    <section id="gallery" class="section" aria-labelledby="gallery-title">
+      <div class="section-head">
+        <h2 id="gallery-title">The models</h2>
+        <p class="muted">Click any model to open it in the viewer. Drag to orbit, pinch or scroll to zoom.</p>
+      </div>
+      <div class="toolbar">
+        <div class="chips" role="group" aria-label="Filter by group" id="chips"></div>
+        <label class="search">
+          <span class="visually-hidden">Search models</span>
+          <input id="search" type="search" placeholder="Search models…" autocomplete="off">
+        </label>
+      </div>
+      <ul class="grid" id="grid"></ul>
+      <p class="empty" id="empty" hidden>No model matches that search.</p>
+    </section>
+
+    <section class="section study-teaser" aria-labelledby="study-title">
+      <div class="study-teaser-inner">
+        <div>
+          <p class="eyebrow">New</p>
+          <h2 id="study-title">The Observatory Study</h2>
+          <p>Every prop in the pack, set out in one room under the brass dome: the desk with its lamp, books and clock, the globe and telescope, the terminals, and the lizard keeping watch.</p>
+          <a class="btn btn-gold" href="study.html">Step inside</a>
+        </div>
+        <a href="study.html" class="study-teaser-art" aria-hidden="true" tabindex="-1">
+          <img src="docs/study.jpg" alt="" loading="lazy" onerror="this.src='docs/models.jpg'">
+        </a>
+      </div>
+    </section>
+
+    <section id="use" class="section" aria-labelledby="use-title">
+      <div class="section-head">
+        <h2 id="use-title">Use them</h2>
+        <p class="muted">The files are packed small for the web: meshopt geometry (<code>EXT_meshopt_compression</code>, <code>KHR_mesh_quantization</code>) and WebP textures (<code>EXT_texture_webp</code>). In three.js, give the loader the meshopt decoder.</p>
+      </div>
+      <div class="code-card">
+        <div class="win-title"><span>loader.js</span><button class="btn-mini" data-copy="#snippet">Copy</button></div>
+<pre id="snippet"><code>import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
+
+const loader = new GLTFLoader();
+loader.setMeshoptDecoder(MeshoptDecoder);
+const { scene } = await loader.loadAsync('models/desk.glb');</code></pre>
+      </div>
+      <p class="muted small">A tool that cannot read those extensions needs the file unpacked first, for example with <a href="https://gltf-transform.dev">glTF-Transform</a>: <code>npx @gltf-transform/cli copy desk.glb desk-plain.glb</code>.</p>
+    </section>
+
+    <section class="section" aria-labelledby="shelf-title">
+      <div class="section-head">
+        <h2 id="shelf-title">The Sovereign Software shelf</h2>
+        <p class="muted">Every box on the Spirit Strikers software shelf. Put the discs in the terminal <a href="https://frog-dex.github.io/terrace-world/library.html#software">at Terrace World</a>.</p>
+      </div>
+      <ul class="shelf">
+        <li><a href="https://github.com/Frog-dex/terrace-world"><img src="docs/shelf/terrace-world.jpg" alt="" loading="lazy"><b>Terrace World</b><span>the game</span></a></li>
+        <li><div><img src="docs/shelf/snowberry-os.jpg" alt="" loading="lazy"><b>Snowberry OS</b><span>early build, not released yet</span></div></li>
+        <li><div><img src="docs/shelf/lizard-widget.jpg" alt="" loading="lazy"><b>Lizard Widget</b><span>add-on, not released yet</span></div></li>
+        <li><div><img src="docs/shelf/frog-widget.jpg" alt="" loading="lazy"><b>Frog Widget</b><span>add-on, not released yet</span></div></li>
+        <li><a href="https://github.com/Frog-dex/3d-models-pack"><img src="docs/shelf/models-pack.jpg" alt="" loading="lazy"><b>3D Models Pack</b><span>thirteen free models</span></a></li>
+        <li><a href="https://github.com/Frog-dex/plan-and-code"><img src="docs/shelf/plan-and-code.jpg" alt="" loading="lazy"><b>Plan &amp; Code</b><span>plan a page, hand it to an AI</span></a></li>
+        <li><a href="https://github.com/Frog-dex/krita-agent"><img src="docs/shelf/krita-agent.jpg" alt="" loading="lazy"><b>Krita Agent</b><span>AI tools inside Krita</span></a></li>
+        <li><a href="https://github.com/Frog-dex/card-forge"><img src="docs/shelf/card-forge.jpg" alt="" loading="lazy"><b>Card Forge</b><span>card-making studio</span></a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Models © 2026 Blu Inman, released under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Credit: “Blu Inman, Spirit Strikers”. The Spirit Strikers name, characters and brand remain © Blu Inman.</p>
+  </footer>
+
+  <dialog id="viewer" class="viewer" aria-labelledby="viewer-name">
+    <div class="win-title viewer-title">
+      <span class="win-caption"><img src="site/icon.svg" alt="" width="16" height="16"> Model Viewer — <span id="viewer-file">desk.glb</span></span>
+      <span class="win-buttons">
+        <button type="button" class="win-btn" id="viewer-full" title="Full screen" aria-label="Full screen">□</button>
+        <button type="button" class="win-btn" id="viewer-close" title="Close (Esc)" aria-label="Close viewer">×</button>
+      </span>
+    </div>
+    <div class="viewer-body">
+      <div class="viewer-stage" id="viewer-stage">
+        <canvas id="viewer-canvas" aria-label="3D view of the selected model. Drag to orbit, scroll or pinch to zoom."></canvas>
+        <div class="viewer-loading" id="viewer-loading"><div class="bar"><i id="viewer-progress"></i></div><span>Loading…</span></div>
+        <button type="button" class="nav-btn prev" id="viewer-prev" aria-label="Previous model">‹</button>
+        <button type="button" class="nav-btn next" id="viewer-next" aria-label="Next model">›</button>
+        <div class="stage-tools" role="group" aria-label="View options">
+          <button type="button" class="tool" id="t-spin" aria-pressed="true">Spin</button>
+          <button type="button" class="tool" id="t-wire" aria-pressed="false">Wireframe</button>
+          <button type="button" class="tool" id="t-shadow" aria-pressed="true">Shadow</button>
+          <button type="button" class="tool" id="t-reset">Reset</button>
+        </div>
+      </div>
+      <aside class="viewer-info">
+        <p class="eyebrow" id="viewer-group"></p>
+        <h2 id="viewer-name"></h2>
+        <p id="viewer-blurb"></p>
+        <dl class="stats">
+          <div><dt>Triangles</dt><dd id="s-tris"></dd></div>
+          <div><dt>File size</dt><dd id="s-size"></dd></div>
+          <div><dt>Meshes</dt><dd id="s-meshes"></dd></div>
+          <div><dt>Textures</dt><dd id="s-tex"></dd></div>
+        </dl>
+        <div class="viewer-actions">
+          <a class="btn btn-gold" id="a-download" download>Download .glb</a>
+          <button type="button" class="btn" id="a-copy">Copy loader code</button>
+          <button type="button" class="btn btn-ghost" id="a-snap">Save snapshot</button>
+        </div>
+        <p class="muted small">CC BY 4.0 · credit “Blu Inman, Spirit Strikers”</p>
+      </aside>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script type="module" src="site/app.js"></script>
+</body>
+</html>

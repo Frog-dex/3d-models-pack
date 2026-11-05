@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Thumbnail renderer</title>
+  <style>html,body{margin:0;background:transparent}canvas{width:512px;height:512px;display:block}</style>
+  <script type="importmap">
+  { "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.187.0/examples/jsm/" } }
+  </script>
+</head>
+<body>
+  <!-- Used by `npm run thumbs` to render docs/thumbs/*.webp; not linked from the site. -->
+  <canvas id="c"></canvas>
+  <script type="module">
+    import { createStage, loadModel, normalize } from './stage.js';
+    import { MODELS, modelUrl } from './catalog.js';
+    const stage = createStage(document.getElementById('c'), { transparent: true });
+    stage.ground.material.opacity = 0.22;
+    let current;
+    window.renderThumb = async (id) => {
+      const m = MODELS.find((x) => x.id === id);
+      if (current) stage.scene.remove(current);
+      current = normalize(await loadModel(modelUrl(m, '../')), { fit: 1 });
+      stage.scene.add(current);
+      stage.frame(current, { distance: 1.0, azimuth: 0.55, elevation: 0.22 });
+      stage.resize();
+      stage.renderer.render(stage.scene, stage.camera);
+      return stage.renderer.domElement.toDataURL('image/webp', 0.86);
+    };
+    window.ready = true;
+  </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+/* The Observatory Study: full-screen scene with floating Snowberry-style controls. */
+body.study { background: #1a0f07; color: #f4e8d2; height: 100dvh; overflow: hidden; }
+#study-canvas { position: fixed; inset: 0; width: 100vw; height: 100dvh; display: block; touch-action: none; }
+.study .viewer-loading { position: fixed; z-index: 3; }
+
+.study-bar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 2; display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+  padding: max(10px, env(safe-area-inset-top)) clamp(12px, 3vw, 28px) 10px;
+  background: linear-gradient(180deg, rgba(20,11,4,.85), rgba(20,11,4,0));
+}
+.study-bar .brand { color: #f4e8d2; font-size: .95rem; }
+.study-bar h1 {
+  font: 400 clamp(1.3rem, 3vw, 2rem)/1 var(--display); text-transform: uppercase; margin: 0; flex: 1; letter-spacing: .02em;
+  background: linear-gradient(180deg, #fff2bf, var(--gold-1) 40%, var(--gold-2)); -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.study-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+
+.study-card {
+  position: fixed; z-index: 2; right: clamp(12px, 3vw, 28px); top: 84px; width: min(340px, calc(100vw - 24px));
+  background: rgba(32, 20, 10, .88); border: 1px solid rgba(246,207,106,.35); border-radius: 14px; padding: 16px 18px 18px;
+  backdrop-filter: blur(8px); box-shadow: 0 20px 50px -20px #000; animation: pop .2s ease-out;
+}
+.study-card .eyebrow { color: var(--gold-1); }
+.study-card h2 { font-size: 1.4rem; margin-right: 36px; }
+.study-card p { color: #e6d3b3; margin: .3em 0 1em; }
+.study-card-x { position: absolute; top: 12px; right: 12px; }
+.study-card .btn { width: 100%; }
+
+.tour {
+  position: fixed; z-index: 2; left: 0; right: 0; bottom: 0; padding: 10px clamp(12px, 3vw, 28px) max(12px, env(safe-area-inset-bottom));
+  background: linear-gradient(0deg, rgba(20,11,4,.9), rgba(20,11,4,0));
+}
+.tour-hint { margin: 0 0 8px; font: .8rem var(--mono); color: #cdb594; }
+.tour-list { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: thin; padding-bottom: 4px; scroll-snap-type: x proximity; }
+.tour-list button {
+  flex: none; display: inline-flex; align-items: center; gap: 8px; padding: 4px 12px 4px 4px; min-height: 48px; scroll-snap-align: start;
+  border-radius: 999px; border: 1px solid rgba(246,207,106,.3); background: rgba(32,20,10,.8); color: #f4e8d2; font: 500 .85rem var(--sans); cursor: pointer;
+}
+.tour-list button img { width: 40px; height: 40px; border-radius: 50%; background: radial-gradient(#5a3e22, #2a1a0e); object-fit: contain; }
+.tour-list button:hover, .tour-list button[aria-current="true"] { border-color: var(--gold-1); background: rgba(90,58,24,.9); }
+
+.study-label {
+  position: fixed; left: 0; top: 0; z-index: 4; pointer-events: none; padding: 4px 10px; border-radius: 6px;
+  background: #fbf6ea; color: #2a1a0e; font: 600 .85rem var(--sans); box-shadow: 0 6px 16px -6px #000;
+}
+.study-label[hidden] { display: none; }
+
+@media (max-width: 640px) {
+  .study-bar .brand span { display: none; }
+  .study-bar h1 { font-size: 1.25rem; }
+  .study-actions { width: 100%; }
+  .study-card { top: auto; bottom: 110px; right: 12px; left: 12px; width: auto; padding: 14px; }
+  .study-card h2 { font-size: 1.15rem; }
+  .study-card p { font-size: .9rem; }
+}
