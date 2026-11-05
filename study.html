@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>The Observatory Study</title>
+  <meta name="description" content="Every model in the 3D Models Pack, set out in one room under the brass dome. Orbit around, tap a prop to learn about it.">
+  <meta name="theme-color" content="#1a0f07">
+  <link rel="icon" href="site/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="site/styles.css">
+  <link rel="stylesheet" href="site/study.css">
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.187.0/examples/jsm/"
+    }
+  }
+  </script>
+</head>
+<body class="study">
+  <canvas id="study-canvas" aria-label="The observatory study in 3D. Drag to look around, scroll or pinch to zoom, tap a prop to focus it."></canvas>
+
+  <header class="study-bar">
+    <a class="brand" href="./"><img src="site/icon.svg" alt="" width="28" height="28"><span>3D Models Pack</span></a>
+    <h1>The Observatory Study</h1>
+    <div class="study-actions">
+      <button type="button" class="tool" id="study-home">Overview</button>
+      <button type="button" class="tool" id="study-spin" aria-pressed="false">Drift</button>
+      <button type="button" class="tool" id="study-light">Lights up</button>
+    </div>
+  </header>
+
+  <div class="viewer-loading" id="study-loading"><div class="bar"><i id="study-progress"></i></div><span>Setting out the props…</span></div>
+
+  <aside class="study-card" id="study-card" hidden aria-live="polite">
+    <button type="button" class="win-btn study-card-x" id="study-card-close" aria-label="Close">×</button>
+    <p class="eyebrow" id="study-card-group"></p>
+    <h2 id="study-card-name"></h2>
+    <p id="study-card-blurb"></p>
+    <a class="btn btn-gold" id="study-card-open" href="index.html">Open in Model Viewer</a>
+  </aside>
+
+  <nav class="tour" aria-label="Props in the room">
+    <p class="tour-hint" id="study-hint">Drag to look around · tap a prop to visit it</p>
+    <div class="tour-list" id="tour"></div>
+  </nav>
+
+  <div class="study-label" id="study-label" hidden></div>
+  <script type="module" src="site/study.js"></script>
+</body>
+</html>
